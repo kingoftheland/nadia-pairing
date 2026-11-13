@@ -436,7 +436,8 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
           }
         };
         var EXPECTED = "0x289692d80C15CF3D82F9B00B270bCfE3C047a152".toLowerCase();
-        var SEPOLIA_HEX = "0xaa36a7"; // 11155111
+        var SEPOLIA_HEX = "0xaa36a7"; // 11155111 (hex, for inside the tx object)
+        var SEPOLIA_CAIP = "eip155:11155111"; // CAIP-2, required by WalletConnect request()
         var RPCS = ["https://ethereum-sepolia-rpc.publicnode.com", "https://1rpc.io/sepolia"];
         var LS_KEY = "sre-sepolia-deployed-v1";
         var INIT_TIMEOUT_MS = 45000;
@@ -694,7 +695,7 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
             "Cek Bitget Wallet dan setujui transaksi deploy " + dep.contract + ".");
           return client.request({
             topic: currentSession.topic,
-            chainId: SEPOLIA_HEX,
+            chainId: SEPOLIA_CAIP,
             request: {
               method: "eth_sendTransaction",
               params: [{ from: connectedAddress, data: data, value: valueHex, chainId: SEPOLIA_HEX }]
@@ -753,7 +754,7 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
           setStatus("", "Mengirim 0,002 ETH ke RiggedRoll…", "Approve di Bitget Wallet.");
           client.request({
             topic: currentSession.topic,
-            chainId: SEPOLIA_HEX,
+            chainId: SEPOLIA_CAIP,
             request: {
               method: "eth_sendTransaction",
               params: [{ from: connectedAddress, to: rr.address, value: "0x71afd498d0000", chainId: SEPOLIA_HEX }]
